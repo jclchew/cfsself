@@ -1,375 +1,249 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Frailty Scale Assessment</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .question-group {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        .options-group {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .checkbox-option, .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-option:hover, .radio-option:hover {
+            background: #e9ecef;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 1rem;
+            transform: scale(1.2);
+        }
+
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .result {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .scale-bar {
+            height: 20px;
+            background: linear-gradient(90deg, var(--success) 0%, var(--warning) 50%, var(--danger) 100%);
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .cf1-3 { color: var(--success); }
+        .cf4 { color: var(--warning); }
+        .cf5 { color: #f39c12; }
+        .cf6 { color: #e67e22; }
+        .cf7-8 { color: var(--danger); }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Clinical Frailty Scale (CFS) Self-Assessment&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Basic CSS Reset --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #333;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #f5f7fa;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 700px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #222;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.subtitle {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #666;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.question-block {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #ddd;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 1px 2px rgba(0,0,0,0.1);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.question-block h2 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.15rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #444;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.option-list {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>list-style: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.option-list li {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.option-list li label {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-left: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.icon {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: right;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #2a71d0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.75rem 1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.button:disabled {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: not-allowed;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hidden {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: none !important;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.result {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #eefcef;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 2px solid #c0ecc3;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 1px 3px rgba(0,0,0,0.1);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>.result h2 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #317f43;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>footer {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #666;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 0.9rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Clinical Frailty Scale (CFS) Self-Assessment&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="subtitle"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>Based on the questionnaire recommended by &lt;strong&gt;Rockwood S, Song X, MacKnight C, et al.&lt;/strong&gt;&lt;br /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;em&gt;Global clinical measure of fitness and frailty in elderly people. CMAJ. 2005;&lt;/em&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="q1" class="question-block"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Q1. Did you need help with any of the following personal care &lt;em&gt;two weeks before your current illness&lt;/em&gt;?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul class="option-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q1" value="toilet" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23000%22&gt;&lt;path d=%22M6 3h2.01C8.55 3 9 3.45 9 3.99v16.02c0 .54-.45.99-.99.99H6V3zm10 0h2v18h-2.01c-.54 0-.99-.45-.99-.99V3.99c0-.54.45-.99.99-.99z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Using the toilet</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q1" value="dressing" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23000%22&gt;&lt;path d=%22M9.28 7l1.44 1.44 1.44-1.44 6.01 6.01-2.14 2.13-4.31-4.31-4.31 4.31-2.13-2.14L9.28 7z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Getting dressed</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q1" value="bathing" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23000%22&gt;&lt;path d=%22M10 5a2 2 0 114 0v2h5v8h-2V9h-1v8H4V9h5V5z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Bathing / Showering</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q1" value="walking" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23000%22&gt;&lt;path d=%22M13.5 5.5a2 2 0 11-4 0 2 2 0 114 0zm-1 3.5h-2l-1 2.5 2 2.5v4.5h2v-5.5l-2-2.5.5-1h1.5V9z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Walking</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="button" id="q1-next" disabled&gt;Next&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="q2" class="question-block hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Q2. Did you need help with any of the following activities?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul class="option-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q2" value="outside" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23000%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M17 4l3 3-3 3v-2H7V6h10V4zm-10 16l-3-3 3-3v2h10v2H7v2z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Going outside</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q2" value="money" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23000%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M16 1H8C5.24 1 3 3.24 3 6v12c0 2.76 2.24 5 5 5h8c2.76 0 5-2.24 5-5V6c0-2.76-2.24-5-5-5zM8 3h8a3 3 0 013 3v2H5V6c0-1.65 1.35-3 3-3zm8 18H8a3 3 0 01-3-3v-2h14v2a3 3 0 01-3 3z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Handling money</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" name="q2" value="medications" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23000%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M15 4H9v2H5v4h2v10h10V10h2V6h-4V4zm-4 14H9v-2h2v2zm0-4H9v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Taking medications</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="button" id="q2-next"&gt;Next&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="q3-q4" class="question-block hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Q3. Did you feel constantly tired throughout the day?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul class="option-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="radio" name="q3" value="yes" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%2308a045%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M9 16.17L4.83 12l-1.41 1.41L9 19 21 7l-1.41-1.41z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Yes</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="radio" name="q3" value="no" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23e01f1f%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>No</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2 style="margin-top: 1rem;"&gt;Q4. Did you feel that you were walking slower than usual?&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;ul class="option-list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="radio" name="q4" value="yes" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%2308a045%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M9 16.17L4.83 12l-1.41 1.41L9 19 21 7l-1.41-1.41z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Yes</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="radio" name="q4" value="no" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="icon" style="background:url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22%23e01f1f%22 viewBox=%220 0 24 24%22&gt;&lt;path d=%22M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z%22/&gt;&lt;/svg&gt;') no-repeat center/contain;"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>No</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="button" id="q3q4-submit" disabled&gt;Submit&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="result" class="result hidden"&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;strong&gt;Disclaimer:&lt;/strong&gt; This self‐assessment is for screening purposes only and should not be considered a medical diagnosis.<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">      </span>Please consult a qualified healthcare professional for a thorough evaluation and personalized advice.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/***************************************************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* References to elements</p>
-<p class="p1"><span class="Apple-converted-space">     </span>***************************************************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q1Block = document.getElementById("q1");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q1NextBtn = document.getElementById("q1-next");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q1Checks = document.querySelectorAll('input[name="q1"]');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q2Block = document.getElementById("q2");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q2NextBtn = document.getElementById("q2-next");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q2Checks = document.querySelectorAll('input[name="q2"]');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q3q4Block = document.getElementById("q3-q4");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q3q4SubmitBtn = document.getElementById("q3q4-submit");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q3Radios = document.querySelectorAll('input[name="q3"]');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const q4Radios = document.querySelectorAll('input[name="q4"]');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const resultBlock = document.getElementById("result");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/***************************************************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* Utility function: show final result</p>
-<p class="p1"><span class="Apple-converted-space">     </span>***************************************************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function showResult(cfsText) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Hide all question blocks</p>
-<p class="p1"><span class="Apple-converted-space">      </span>q1Block.classList.add("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>q2Block.classList.add("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>q3q4Block.classList.add("hidden");</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Display the result with summary</p>
-<p class="p1"><span class="Apple-converted-space">      </span>resultBlock.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Your CFS Result&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;&lt;strong&gt;${cfsText}&lt;/strong&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;This classification is based on your self-reported answers. For medical advice and next steps, consult a healthcare professional.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>resultBlock.classList.remove("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>window.scrollTo({ top: 0, behavior: 'smooth' });</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/***************************************************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* Q1 Logic</p>
-<p class="p1"><span class="Apple-converted-space">     </span>***************************************************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>q1Checks.forEach(checkbox =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>checkbox.addEventListener("change", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// The user is allowed to proceed once they've made a selection (or none).</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// We only require them to press "Next" to confirm.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>q1NextBtn.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>q1NextBtn.addEventListener("click", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const checkedCount = document.querySelectorAll('input[name="q1"]:checked').length;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (checkedCount === 4) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// All 4 ticked =&gt; CFS 7–8</p>
-<p class="p1"><span class="Apple-converted-space">        </span>showResult("CFS 7–8: Severely Frail");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else if (checkedCount &gt;= 1 &amp;&amp; checkedCount &lt;= 3) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 1–3 ticked =&gt; CFS 6</p>
-<p class="p1"><span class="Apple-converted-space">        </span>showResult("CFS 6: Moderately Frail");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 0 ticked =&gt; proceed to Q2</p>
-<p class="p1"><span class="Apple-converted-space">        </span>q1Block.classList.add("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>q2Block.classList.remove("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/***************************************************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* Q2 Logic</p>
-<p class="p1"><span class="Apple-converted-space">     </span>***************************************************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>q2NextBtn.addEventListener("click", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const checkedCountQ2 = document.querySelectorAll('input[name="q2"]:checked').length;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (checkedCountQ2 &gt;= 1) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Any ticked =&gt; CFS 5</p>
-<p class="p1"><span class="Apple-converted-space">        </span>showResult("CFS 5: Mildly Frail");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// None ticked =&gt; proceed to Q3/Q4</p>
-<p class="p1"><span class="Apple-converted-space">        </span>q2Block.classList.add("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>q3q4Block.classList.remove("hidden");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/***************************************************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* Q3 &amp; Q4 Logic</p>
-<p class="p1"><span class="Apple-converted-space">     </span>***************************************************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function validateQ3Q4() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const q3Selected = document.querySelector('input[name="q3"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const q4Selected = document.querySelector('input[name="q4"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (q3Selected &amp;&amp; q4Selected) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>q3q4SubmitBtn.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>q3Radios.forEach(radio =&gt; radio.addEventListener("change", validateQ3Q4));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>q4Radios.forEach(radio =&gt; radio.addEventListener("change", validateQ3Q4));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>q3q4SubmitBtn.addEventListener("click", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const q3Value = document.querySelector('input[name="q3"]:checked').value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const q4Value = document.querySelector('input[name="q4"]:checked').value;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (q3Value === "yes" || q4Value === "yes") {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>showResult("CFS 4: Pre-Frail");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>showResult("CFS 1–3: Robust");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div class="container">
+        <h1>Clinical Frailty Scale Assessment</h1>
+        
+        <form id="frailtyForm">
+            <div class="question-group">
+                <h2>Q1: Personal Care Assistance</h2>
+                <p>Two weeks BEFORE your current illness, did you need help with:</p>
+                <div class="options-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q1" value="toilet"> Using the toilet
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q1" value="dressed"> Getting dressed
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q1" value="bathing"> Bathing/Showering
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q1" value="walking"> Walking
+                    </label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h2>Q2: Activity Assistance</h2>
+                <div class="options-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q2" value="shopping"> Doing Shopping
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q2" value="money"> Managing Money
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="q2" value="medication"> Taking Medication
+                    </label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h2>Q3: Fatigue</h2>
+                <div class="options-group">
+                    <label class="radio-option">
+                        <input type="radio" name="q3" value="yes"> Yes, felt constantly tired
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q3" value="no"> No
+                    </label>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h2>Q4: Walking Speed</h2>
+                <div class="options-group">
+                    <label class="radio-option">
+                        <input type="radio" name="q4" value="yes"> Yes, walked slower than usual
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q4" value="no"> No
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Calculate Frailty Score</button>
+        </form>
+
+        <div class="result" id="result">
+            <div class="scale-bar"></div>
+            <h2 id="scoreTitle"></h2>
+            <p id="scoreDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('frailtyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Gather responses
+            const q1 = document.querySelectorAll('[name="q1"]:checked').length;
+            const q2 = document.querySelectorAll('[name="q2"]:checked').length;
+            const q3 = document.querySelector('[name="q3"]:checked')?.value;
+            const q4 = document.querySelector('[name="q4"]:checked')?.value;
+
+            // Determine CFS score
+            let score = '';
+            let description = '';
+            let colorClass = '';
+
+            if (q1 === 4) {
+                score = 'CFS 7-8';
+                description = 'Severely Frail';
+                colorClass = 'cf7-8';
+            } else if (q1 >= 1 && q1 <= 3) {
+                score = 'CFS 6';
+                description = 'Moderately Frail';
+                colorClass = 'cf6';
+            } else if (q2 > 0) {
+                score = 'CFS 5';
+                description = 'Mildly Frail';
+                colorClass = 'cf5';
+            } else if (q3 === 'yes' || q4 === 'yes') {
+                score = 'CFS 4';
+                description = 'Pre-Frail';
+                colorClass = 'cf4';
+            } else if (q3 === 'no' && q4 === 'no') {
+                score = 'CFS 1-3';
+                description = 'Robust';
+                colorClass = 'cf1-3';
+            } else {
+                alert('Please answer all questions');
+                return;
+            }
+
+            // Display results
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = `result ${colorClass}`;
+            document.getElementById('scoreTitle').innerHTML = 
+                `${score} - <span class="${colorClass}">${description}</span>`;
+            document.getElementById('scoreDescription').textContent = getDescriptionText(score);
+        });
+
+        function getDescriptionText(score) {
+            const descriptions = {
+                'CFS 7-8': 'Requires help with all personal care activities. Please consult a healthcare professional.',
+                'CFS 6': 'Requires help with some personal care activities. Consider discussing with your care provider.',
+                'CFS 5': 'Requires help with instrumental activities. Monitor your health closely.',
+                'CFS 4': 'Showing early signs of frailty. Maintain regular physical activity and health checks.',
+                'CFS 1-3': 'Good level of robustness. Continue healthy lifestyle habits.'
+            };
+            return descriptions[score];
+        }
+    </script>
 </body>
 </html>
